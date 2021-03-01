@@ -37,3 +37,4 @@ jobs:
           tags: |
             docker.pkg.github.com/${{ github.repository }}/meh:latest
             docker.pkg.github.com/${{ github.repository }}/meh:${{ github.sha }}
+            
