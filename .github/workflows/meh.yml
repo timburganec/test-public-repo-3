@@ -22,4 +22,6 @@ jobs:
             docker.pkg.github.com/${{ github.repository }}/doh:latest
             docker.pkg.github.com/${{ github.repository }}/doh:${{ github.sha }}
       - name: push
-        run: docker push docker.pkg.github.com/${{ github.repository }}/doh:latest
+        run: |
+          docker images
+          # docker push docker.pkg.github.com/${{ github.repository }}/doh:latest
