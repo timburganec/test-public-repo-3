@@ -1,1 +1,1 @@
-FROM ruby:alpine
+FROM ruby
