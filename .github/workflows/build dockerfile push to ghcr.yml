@@ -19,3 +19,4 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:latest${{ github.sha }}
+
