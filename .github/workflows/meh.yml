@@ -13,13 +13,13 @@ jobs:
           registry: docker.pkg.github.com
           username: timburgan
           password: ${{ secrets.GHCR_TIMBURGAN_PAT }}
-     - name: tag
+      - name: tag
         uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile
-          tags: |
-            docker.pkg.github.com/${{ github.repository }}/doh:latest
-            docker.pkg.github.com/${{ github.repository }}/doh:${{ github.sha }}
-     - name: push
-       run: docker push docker.pkg.github.com/${{ github.repository }}/doh:latest
+         with:
+           context: .
+           file: ./Dockerfile
+           tags: |
+             docker.pkg.github.com/${{ github.repository }}/doh:latest
+             docker.pkg.github.com/${{ github.repository }}/doh:${{ github.sha }}
+      - name: push
+        run: docker push docker.pkg.github.com/${{ github.repository }}/doh:latest
