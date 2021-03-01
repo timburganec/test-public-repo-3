@@ -1,0 +1,21 @@
+on: [push]
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello"
+      - uses: actions/checkout@v2
+      - uses: docker/setup-buildx-actions@v1
+      - uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: timburgan
+          password: $${{ secrets.GHCR_TIMBURGAN_PAT }}
+      - uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ github.repository }}:latest${{ github.sha }}
