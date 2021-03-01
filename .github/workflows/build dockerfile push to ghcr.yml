@@ -10,7 +10,7 @@ jobs:
         with:
           registry: ghcr.io
           username: timburgan
-          password: $${{ secrets.GHCR_TIMBURGAN_PAT }}
+          password: ${{ secrets.GHCR_TIMBURGAN_PAT }}
       - uses: docker/build-push-action@v2
         with:
           context: .
