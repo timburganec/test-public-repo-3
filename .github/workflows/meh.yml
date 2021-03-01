@@ -5,23 +5,12 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      - name: build
-        uses: docker/setup-buildx-action@v1
-      - name: login
-        uses: docker/login-action@v1
+      - uses: docker/build-push-action@v2
         with:
           registry: docker.pkg.github.com
           username: timburgan
           password: ${{ secrets.GHCR_TIMBURGAN_PAT }}
-      - name: tag
-        uses: docker/build-push-action@v2
-        with:
+          repository: ${{ github.repository }}/doh
+          tag_with_ref: true
           context: .
           file: ./Dockerfile
-          tags: |
-            docker.pkg.github.com/${{ github.repository }}/doh:latest
-            docker.pkg.github.com/${{ github.repository }}/doh:${{ github.sha }}
-      - name: push
-        run: |
-          docker images
-          # docker push docker.pkg.github.com/${{ github.repository }}/doh:latest
