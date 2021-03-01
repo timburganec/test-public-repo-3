@@ -8,6 +8,20 @@ jobs:
       - uses: docker/setup-buildx-action@v1
         with:
           buildkitd-flags: --debug
+      - uses: docker/login-action@v1
+        with:
+          registry: docker.pkg.github.com
+          username: timburgan
+          password: ${{ secrets.GHCR_TIMBURGAN_PAT }}
+      - uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            docker.pkg.github.com/${{ github.repository }}/meh:latest
+            docker.pkg.github.com/${{ github.repository }}/meh:${{ github.sha }}
+            
 
       # - uses: docker/login-action@v1
       #   with:
@@ -23,18 +37,3 @@ jobs:
       #     tags: |
       #       ghcr.io/${{ github.repository }}:latest
       #       ghcr.io/${{ github.repository }}:${{ github.sha }}
-
-      - uses: docker/login-action@v1
-        with:
-          registry: docker.pkg.github.com
-          username: timburgan
-          password: ${{ secrets.GHCR_TIMBURGAN_PAT }}
-      - uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: |
-            docker.pkg.github.com/${{ github.repository }}/meh:latest
-            docker.pkg.github.com/${{ github.repository }}/meh:${{ github.sha }}
-            
